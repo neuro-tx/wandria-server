@@ -42,7 +42,7 @@ const register = asyncWrapper(async (req, res) => {
 
   res.cookie("refresh-token", refreshToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
     sameSite: "none",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
@@ -88,7 +88,7 @@ const login = asyncWrapper(async (req, res) => {
 
   res.cookie("refresh-token", refreshToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
     sameSite: "none",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
@@ -131,7 +131,7 @@ const imageKitAuth = asyncWrapper(async (req, res) => {
 const logout = asyncWrapper(async (req, res) => {
   res.clearCookie("refresh-token", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
     sameSite: "none",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
