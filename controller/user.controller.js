@@ -86,9 +86,9 @@ const addUser = asyncWrapper(async (req, res) => {
 
     res.cookie("refresh-token", refreshToken, {
       httpOnly: true,
-      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      secure: process.env.NODE_ENV === "production"
     });
 
     res.status(201).json(
