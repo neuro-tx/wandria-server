@@ -43,7 +43,7 @@ const register = asyncWrapper(async (req, res) => {
   res.cookie("refresh-token", refreshToken, {
     httpOnly: true,
     sameSite: "lax",
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
@@ -89,7 +89,7 @@ const login = asyncWrapper(async (req, res) => {
   res.cookie("refresh-token", refreshToken, {
     httpOnly: true,
     sameSite: "lax",
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
@@ -132,10 +132,10 @@ const logout = asyncWrapper(async (req, res) => {
   res.clearCookie("refresh-token", {
     httpOnly: true,
     sameSite: "lax",
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
   });
 
   res.status(200).json(dataform("success", 200, "user loged out successfully"));
 });
 
-module.exports = { register, login, imageKitAuth ,logout };
+module.exports = { register, login, imageKitAuth, logout };
